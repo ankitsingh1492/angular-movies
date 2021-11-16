@@ -6,7 +6,7 @@ import {
 
 import { AppModule } from './app.module';
 import { AppComponent } from './app.component';
-import { RX_ANGULAR_CONFIG } from '@rx-angular/cdk';
+import { RX_ANGULAR_CONFIG } from '@rx-angular/cdk/render-strategies';
 
 @NgModule({
   imports: [AppModule, ServerModule, ServerTransferStateModule],
