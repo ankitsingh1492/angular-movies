@@ -31,6 +31,11 @@ import { stateAppInitializerProvider } from './shared/state/state-app-initialize
   ],
   providers: [
     httpInterceptorProviders,
+    /**
+     * **🚀 Perf Tip for LCP, TTI:**
+     *
+     * Run initial data fetching at app bootstrap time.
+     */
     stateAppInitializerProvider,
     {
       provide: RX_ANGULAR_CONFIG,

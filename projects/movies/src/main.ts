@@ -12,7 +12,7 @@ if (environment.production) {
  * **🚀 Perf Tip for TBT:**
  *
  * Schedule app bootstrap into next task to reduce Total Blocking Time (TTB).
- * We dont want to triger style recalculation we avoid `animationFrame`.
+ * We don't want to trigger style recalculation we avoid `requestAnimationFrame`.
  */
 setTimeout(() =>
   platformBrowserDynamic()

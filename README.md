@@ -15,14 +15,82 @@ A [live deployment](https://angular-movies-a12d3.web.app/movies/popular) of this
 
 For now you can search the codebase for "Perf Tip" later on there will be propper documentation here.
 
-
-
 [Measures before optimization](https://lighthouse-metrics.com/one-time-tests/616db7e91cff420008f70364)
 ![angular-movies-before_michael-hladky](https://user-images.githubusercontent.com/10064416/137785051-1cf9f63a-e803-4d92-a952-c327b7628530.PNG)
 
 
 [Measures after optimization](https://lighthouse-metrics.com/one-time-tests/6171cc3ac759010008e78ee6)
 ![angular-movies-after_michael-hladky](https://user-images.githubusercontent.com/10064416/138353891-97ea6278-a604-4ffe-9b87-a9ac1bbf0747.PNG)
+
+### [Schedule App Bootstrapping](/projects/movies/src/main.ts#L11-L18)
+
+```ts 
+/**
+ * **🚀 Perf Tip for TBT:**
+ *
+ * Schedule app bootstrap into next task to reduce Total Blocking Time (TTB).
+ * We don't want to trigger style recalculation we avoid `requestAnimationFrame`.
+ */
+setTimeout(
+  () =>platformBrowserDynamic().bootstrapModule(AppModule, { ngZone: 'noop' })
+);
+```
+
+### [Disable zone.js](/projects/movies/src/main.ts#L18-L25)
+
+<!-- embedme projects/movies/src/main.ts#L18-L25 -->
+```ts
+platformBrowserDynamic()
+/**
+ * **🚀 Perf Tip for LCP, TTI, TBT:**
+ *
+ * Disable zone.js as change detection system.
+ * Don't forget to remove `zone.js` import from the `polyfills.ts` file
+ */
+.bootstrapModule(AppModule, { ngZone: 'noop' })
+```
+
+### [Preconnect urls](/projects/movies/src/index.html#L13-L23)
+
+<!-- embedme projects/movies/src/index.html#L13-L23 -->
+```html
+<!--
+**🚀 Perf Tip for LCP:**
+
+preconnect urls used in the bootstrap phase or important urls used later in time.
+-->
+    <link
+      rel="preconnect"
+      href="https://image.themoviedb.org/"
+      crossorigin=""
+    />
+    <link rel="preconnect" href="https://api.tmdb.org/" crossorigin="" />
+```
+
+### [remove zone.js polyfill](/projects/movies/src/polofills.ts#L49-L54)
+
+<!-- embedme projects/movies/src/polyfills.ts#L49-L54 -->
+```ts
+/*
+ **🚀 Perf Tip for LCP, TTI, TBT:**
+ *
+ * Remove `zone.js` import to save significant bundle size and bootstrap time
+ */
+// import 'zone.js'; // Included with Angular CLI.
+```
+
+### [remove zone.js polyfill](/projects/movies/src/polofills.ts#L49-L54)
+
+<!-- embedme projects/movies/src/polyfill.ts#L49-L54 -->
+```ts
+
+```
+
+
+
+
+
+
 
 
 ## Contributing
