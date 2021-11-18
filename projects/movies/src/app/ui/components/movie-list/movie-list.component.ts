@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { RxState } from '@rx-angular/state';
-import { map, Observable } from 'rxjs';
+import { map } from 'rxjs';
 import { MovieModel } from '../../../data-access/model/movie.model';
 import { W300H450 } from '../../../data-access/configurations/image-sizes';
 
@@ -25,17 +25,16 @@ interface Movie extends MovieModel {
           (click)='navigateToMovie(movie)'
         >
           <div class='movies-list--grid-item-image gradient'>
-            <app-aspect-ratio-box [aspectRatio]='movie.imgWidth / movie.imgHeight'>
+            <app-aspect-ratio-box [aspectRatio]='W300H450.WIDTH / W300H450.HEIGHT'>
               <!--
               **🚀 Perf Tip for LCP:**
               To get out the best performance use the native HTML attribute loading="lazy" instead of a directive.
               This avoids bootstrap and template evaluation time and reduces scripting time in general.
               -->
               <img
-                loading='lazy'
                 [src]='movie.url'
-                [width]='movie.imgWidth'
-                [height]='movie.imgHeight'
+                [width]='W300H450.WIDTH'
+                [height]='W300H450.HEIGHT'
                 alt='poster movie'
                 [title]='movie.title'
               />
@@ -68,10 +67,12 @@ interface Movie extends MovieModel {
   `,
   styleUrls: ['./movie-list.component.scss'],
   providers: [RxState],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.Default
 })
 export class MovieListComponent {
 
+
+  W300H450 = W300H450;
   movies$ = this.state.select('movies').pipe(
     map(
       /**
@@ -81,9 +82,7 @@ export class MovieListComponent {
       (movies) =>
         (movies || []).map((m) => ({
           ...m,
-          url: `https://image.tmdb.org/t/p/w${W300H450.WIDTH}/${m.poster_path}`,
-          imgWidth: W300H450.WIDTH,
-          imgHeight: W300H450.HEIGHT
+          url: `https://image.tmdb.org/t/p/w${W300H450.WIDTH}/${m.poster_path}`
         })) as Movie[]
     )
   );
@@ -93,14 +92,16 @@ export class MovieListComponent {
     .pipe(map((movies) => !!movies && movies.length > 0));
 
   @Input()
-  set movies(movies$: Observable<MovieModel[]>) {
-    this.state.connect('movies', movies$);
+ // set movies(movies$: Observable<MovieModel[]>) {
+  set movies(movies: MovieModel[] | null) {
+    //this.state.connect('movies', movies$);
+    this.state.set({ movies });
   }
 
   constructor(
     private router: Router,
     private state: RxState<{
-      movies: MovieModel[];
+      movies: MovieModel[] | null;
     }>
   ) {
   }

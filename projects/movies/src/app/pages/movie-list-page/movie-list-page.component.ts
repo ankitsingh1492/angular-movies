@@ -28,7 +28,7 @@ type RouterParams = {
       }
     `
   ],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.Default
 })
 export class MovieListPageComponent extends RxState<MoviesState> {
   movies: MovieModel[] = [];

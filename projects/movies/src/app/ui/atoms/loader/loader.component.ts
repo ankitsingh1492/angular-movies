@@ -8,7 +8,7 @@ import {
 
 @Component({
   selector: 'app-loader',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.Default,
   styles: [
     `
       :host {

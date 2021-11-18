@@ -16,7 +16,7 @@ import { ChangeDetectionStrategy, Component, NgModule } from '@angular/core';
       }
     `,
   ],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.Default,
 })
 export class FormControlComponent {}
 

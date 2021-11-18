@@ -123,9 +123,8 @@
 </div>
 <div
   class="padding-wrapper movie-detail--recommended"
-  *rxLet="recommendedLoading$; let loading"
 >
-  <app-movie-list *ngIf="!loading" [movies]="recommendations$">
+  <app-movie-list *ngIf="!(recommendedLoading$ | async)" [movies]="recommendations$ | async">
     <div class="header">
       <h1 class="title">Recommended</h1>
       <h2 class="subtitle">Movies</h2>

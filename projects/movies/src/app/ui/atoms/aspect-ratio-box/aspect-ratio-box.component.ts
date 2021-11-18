@@ -33,7 +33,7 @@ import {
       }
     `,
   ],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.Default,
 })
 export class AspectRatioBoxComponent {
   @Input()
