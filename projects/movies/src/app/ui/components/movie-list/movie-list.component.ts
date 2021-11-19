@@ -15,13 +15,11 @@ interface Movie extends MovieModel {
   selector: 'app-movie-list',
   template: `
     <ng-content select='.header'></ng-content>
-    <ng-container
-      *rxLet="hasMovies$; let hasMovies; strategy: 'instantUserBlocking'"
-    >
-      <div class='movies-list--grid' *ngIf='hasMovies; else noData'>
+
+      <div class='movies-list--grid' *ngIf='hasMovies$ | async; else noData'>
         <a
           class='movies-list--grid-item'
-          *rxFor='let movie of movies$; trackBy: trackByMovieId'
+          *ngFor='let movie of movies$ | async; trackBy: trackByMovieId'
           (click)='navigateToMovie(movie)'
         >
           <div class='movies-list--grid-item-image gradient'>
@@ -49,7 +47,7 @@ interface Movie extends MovieModel {
         </a>
         <div class='pagination'></div>
       </div>
-    </ng-container>
+
 
     <ng-template #noData>
       <h3>
