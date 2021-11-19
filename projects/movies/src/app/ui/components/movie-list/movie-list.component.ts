@@ -17,6 +17,10 @@ interface Movie extends MovieModel {
     <ng-content select='.header'></ng-content>
 
       <div class='movies-list--grid' *ngIf='hasMovies$ | async; else noData'>
+        <!--
+              **🚀 Perf Tip for TBT, LCP:**
+              Use *rxFor over *ngFor to render lists to reduce TBT and possible increase LCP.
+              -->
         <a
           class='movies-list--grid-item'
           *ngFor='let movie of movies$ | async; trackBy: trackByMovieId'
