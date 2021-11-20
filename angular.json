@@ -47,7 +47,7 @@
                 {
                   "type": "initial",
                   "maximumWarning": "300kb",
-                  "maximumError": "324.39kb"
+                  "maximumError": " 356.15kb"
                 },
                 {
                   "type": "anyComponentStyle",
@@ -57,20 +57,20 @@
                 {
                   "type": "bundle",
                   "name": "main",
-                  "maximumWarning": "300000b",
-                  "maximumError": "328593b"
+                  "maximumWarning": "300kb",
+                  "maximumError": "311.12kb"
                 },
                 {
                   "type": "bundle",
                   "name": "styles",
                   "maximumWarning": "5000b",
-                  "maximumError": "5120b"
+                  "maximumError": "6.03kb"
                 },
                 {
                   "type": "bundle",
                   "name": "polyfills",
-                  "maximumWarning": "118b",
-                  "maximumError": "118b"
+                  "maximumWarning": "36.18kb",
+                  "maximumError": "36.2kb"
                 }
               ],
               "fileReplacements": [
