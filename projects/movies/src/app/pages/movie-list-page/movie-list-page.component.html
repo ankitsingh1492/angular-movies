@@ -1,12 +1,12 @@
 <div class="padding-wrapper">
     <app-movie-list *ngIf="!(loading$ | async); else loadingTpl" [movies]="movies$ | async">
       <div class="header">
-        <h1 class="title"*ngIf="title$ | async as title">{{ title || '' }}</h1>
+        <h1 data-test="header-list" class="title"*ngIf="title$ | async as title">{{ title || '' }}</h1>
         <p class="subtitle">movies</p>
       </div>
     </app-movie-list>
 
   <ng-template #loadingTpl>
-    <app-loader></app-loader>
+    <app-loader data-test="list-loader"></app-loader>
   </ng-template>
 </div>

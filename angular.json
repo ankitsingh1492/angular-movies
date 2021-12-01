@@ -51,14 +51,14 @@
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "2900b",
-                  "maximumError": "2960b"
+                  "maximumWarning": "3000b",
+                  "maximumError": "3846b"
                 },
                 {
                   "type": "bundle",
                   "name": "main",
                   "maximumWarning": "300kb",
-                  "maximumError": "311.12kb"
+                  "maximumError": "328.59kb"
                 },
                 {
                   "type": "bundle",

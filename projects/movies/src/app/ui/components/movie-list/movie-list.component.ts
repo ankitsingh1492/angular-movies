@@ -1,15 +1,12 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { RxState } from '@rx-angular/state';
-import { map } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { MovieModel } from '../../../data-access/model/movie.model';
 import { W300H450 } from '../../../data-access/configurations/image-sizes';
+import { ImageTag } from '../../../shared/utils/image-object';
 
-interface Movie extends MovieModel {
-  url: string;
-  imgWidth: number;
-  imgHeight: number;
-}
+type Movie = MovieModel & ImageTag;
 
 @Component({
   selector: 'app-movie-list',
@@ -23,20 +20,22 @@ interface Movie extends MovieModel {
               -->
         <a
           class='movies-list--grid-item'
-          *ngFor='let movie of movies$ | async; trackBy: trackByMovieId'
+          *ngFor='let movie of movies$ | async; index as idx; trackBy: trackByMovieId'
           (click)='navigateToMovie(movie)'
+          [attr.data-test]="'list-item-idx-'+idx"
         >
           <div class='movies-list--grid-item-image gradient'>
-            <app-aspect-ratio-box [aspectRatio]='W300H450.WIDTH / W300H450.HEIGHT'>
+            <app-aspect-ratio-box [aspectRatio]='movies.imgWidth / movies.imgHeight'>
               <!--
               **🚀 Perf Tip for LCP:**
               To get out the best performance use the native HTML attribute loading="lazy" instead of a directive.
               This avoids bootstrap and template evaluation time and reduces scripting time in general.
               -->
               <img
+                [attr.loading]="idx === 0 ? '' : 'lazy'"
                 [src]='movie.url'
-                [width]='W300H450.WIDTH'
-                [height]='W300H450.HEIGHT'
+                [width]='movie.imgWidth'
+                [height]='movie.imgHeight'
                 alt='poster movie'
                 [title]='movie.title'
               />
@@ -54,7 +53,7 @@ interface Movie extends MovieModel {
 
 
     <ng-template #noData>
-      <h3>
+      <h3 data-test="list-empty">
         No results
         <svg class='icon' viewBox='0 0 24 24' fill='currentColor'>
           <path d='M0 0h24v24H0V0z' fill='none' />
@@ -73,37 +72,34 @@ interface Movie extends MovieModel {
 })
 export class MovieListComponent {
 
-
-  W300H450 = W300H450;
-  movies$ = this.state.select('movies').pipe(
+  movies$ = this.state.select(
     map(
       /**
        *
        * @TODO remove spread and use for loop
        */
-      (movies) =>
-        (movies || []).map((m) => ({
+      (state) =>
+        (state.movies || []).map((m) => ({
           ...m,
-          url: `https://image.tmdb.org/t/p/w${W300H450.WIDTH}/${m.poster_path}`
+          url: `https://image.tmdb.org/t/p/w${W300H450.WIDTH}/${m.poster_path}`,
+          imgWidth: W300H450.WIDTH,
+          imgHeight: W300H450.HEIGHT
         })) as Movie[]
     )
   );
 
   hasMovies$ = this.state
-    .select('movies')
-    .pipe(map((movies) => !!movies && movies.length > 0));
+    .select(map((state) => !!state.movies && state.movies.length > 0));
 
   @Input()
- // set movies(movies$: Observable<MovieModel[]>) {
-  set movies(movies: MovieModel[] | null) {
-    //this.state.connect('movies', movies$);
-    this.state.set({ movies });
+  set movies(movies$: Observable<MovieModel[]>) {
+    this.state.connect('movies', movies$);
   }
 
   constructor(
     private router: Router,
     private state: RxState<{
-      movies: MovieModel[] | null;
+      movies: MovieModel[];
     }>
   ) {
   }
