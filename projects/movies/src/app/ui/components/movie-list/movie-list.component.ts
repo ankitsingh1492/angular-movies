@@ -28,11 +28,16 @@ type Movie = MovieModel & ImageTag;
             <app-aspect-ratio-box [aspectRatio]='movie.imgWidth / movie.imgHeight'>
               <!--
               **🚀 Perf Tip for LCP:**
+
               To get out the best performance use the native HTML attribute loading="lazy" instead of a directive.
               This avoids bootstrap and template evaluation time and reduces scripting time in general.
+              loading="lazy"
+
+              Addon Tip:
+              [attr.loading]="idx === 0 ? '' : 'lazy'"
               -->
               <img
-                [attr.loading]="idx === 0 ? '' : 'lazy'"
+
                 [src]='movie.url'
                 [width]='movie.imgWidth'
                 [height]='movie.imgHeight'
