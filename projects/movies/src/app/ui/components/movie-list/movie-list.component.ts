@@ -12,7 +12,7 @@ type Movie = MovieModel & ImageTag;
   selector: 'app-movie-list',
   template: `
     <ng-content select='.header'></ng-content>
-
+<!-- <ng-container *rxLet="hasMovies$; let hasMovies"></ng-container> -->
       <div class='movies-list--grid' *ngIf='hasMovies$ | async; else noData'>
         <!--
               **🚀 Perf Tip for TBT, LCP:**

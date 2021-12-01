@@ -43,6 +43,7 @@ export class AppShellComponent {
         map((e) => e.urlAfterRedirects.split('?')[0])
       )
     );
+    // setTimeout(()=> this.router.navigate(['/movies/popular']))
   }
 
   genres$ = this.tmdbState.genresNames$;

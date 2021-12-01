@@ -1,6 +1,8 @@
 <div class="padding-wrapper">
+  <!-- *rxLet="loading$; let loading" -->
     <app-movie-list *ngIf="!(loading$ | async); else loadingTpl" [movies]="movies$">
       <div class="header">
+        <!-- *rxLet="title$; let title" -->
         <h1 data-test="header-list" class="title"*ngIf="title$ | async as title">{{ title || '' }}</h1>
         <p class="subtitle">movies</p>
       </div>
