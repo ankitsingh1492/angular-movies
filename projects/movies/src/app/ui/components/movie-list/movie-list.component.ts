@@ -25,7 +25,7 @@ type Movie = MovieModel & ImageTag;
           [attr.data-test]="'list-item-idx-'+idx"
         >
           <div class='movies-list--grid-item-image gradient'>
-            <app-aspect-ratio-box [aspectRatio]='movies.imgWidth / movies.imgHeight'>
+            <app-aspect-ratio-box [aspectRatio]='movie.imgWidth / movie.imgHeight'>
               <!--
               **🚀 Perf Tip for LCP:**
               To get out the best performance use the native HTML attribute loading="lazy" instead of a directive.
@@ -93,7 +93,7 @@ export class MovieListComponent {
 
   @Input()
   set movies(movies$: Observable<MovieModel[]>) {
-    this.state.connect('movies', movies$);
+    this.state.connect('movies', movies$ as any);
   }
 
   constructor(

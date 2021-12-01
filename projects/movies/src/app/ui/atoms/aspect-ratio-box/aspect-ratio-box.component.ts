@@ -9,7 +9,7 @@ import {
  * **🚀 Perf Tip for TBT:**
  *
  * Reduce scripting time by caching results of pure calculations.
- */
+
 const paddingTopMap = new Map<number, number>();
 function calcPaddingTop(ratio: number): number {
   if (paddingTopMap.get(ratio) === undefined) {
@@ -17,7 +17,7 @@ function calcPaddingTop(ratio: number): number {
   }
   return paddingTopMap.get(ratio) as number;
 }
-
+ */
 @Component({
   selector: 'app-aspect-ratio-box',
   template: `
