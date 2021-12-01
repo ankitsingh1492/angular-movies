@@ -108,6 +108,8 @@ export class StateService extends RxState<State> {
       ),
       ({ genreMovies }, newPartial) => patch(genreMovies, newPartial)
     );
+
+    this.init();
   }
 
   init(): void {

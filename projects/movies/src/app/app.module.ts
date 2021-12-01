@@ -6,9 +6,9 @@ import { ROUTING_IMPORTS } from './app.routing';
 import { AppComponent } from './app.component';
 import { AppShellModule } from './app-shell/app-shell.module';
 import { httpInterceptorProviders } from './data-access/auth/http-interceptor.providers';
-import { stateAppInitializerProvider } from './shared/state/state-app-initializer.provider';
+//import { stateAppInitializerProvider } from './shared/state/state-app-initializer.provider';
+//import { scheduledAppInitializerProvider } from './shared/utils/chunk-initializer-taks.provider';
 import { MovieListPageModule } from './pages/movie-list-page/movie-list-page.module';
-import { scheduledAppInitializerProvider } from './shared/utils/chunk-initializer-taks.provider';
 import { SERVICE_WORKER_IMPORTS } from './service-worker.imports';
 import { SSR_IMPORTS } from './ssr.imports';
 import { rxaConfigProviders } from './shared/utils/rxa-config.provider';
@@ -42,13 +42,13 @@ import { rxaConfigProviders } from './shared/utils/rxa-config.provider';
      *
      * Fetch data visible in viewport on app bootstrap instead of component initialization.
      */
-    stateAppInitializerProvider,
+    //stateAppInitializerProvider,
     /**
      * **🚀 Perf Tip for TBT:**
      *
      * Chunk app bootstrap over APP_INITIALIZER.
      */
-    scheduledAppInitializerProvider,
+    // scheduledAppInitializerProvider,
     /**
      * **🚀 Perf Tip for TBT, LCP, CLS:**
      *
