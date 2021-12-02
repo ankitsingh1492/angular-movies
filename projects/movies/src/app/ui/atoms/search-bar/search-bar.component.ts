@@ -144,7 +144,7 @@ import { SearchIconComponentModule } from '../icons/search/search-icon.component
       }
     `,
   ],
-  changeDetection: ChangeDetectionStrategy.Default,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SearchBarComponent implements OnInit, OnDestroy {
   @ViewChild('searchInput') inputRef!: ElementRef<HTMLInputElement>;

@@ -21,7 +21,7 @@ interface MovieDetailPageModel {
   selector: 'app-movie',
   templateUrl: './movie-detail-page.component.html',
   styleUrls: ['./movie-detail-page.component.scss'],
-  changeDetection: ChangeDetectionStrategy.Default,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [RxState],
 })
 export class MovieDetailPageComponent {

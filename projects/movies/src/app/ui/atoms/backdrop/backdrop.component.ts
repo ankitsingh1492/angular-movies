@@ -34,7 +34,7 @@ import {
       }
     `,
   ],
-  changeDetection: ChangeDetectionStrategy.Default,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BackdropComponent {
   @HostBinding('class.opened')

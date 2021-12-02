@@ -21,7 +21,7 @@ import { BackdropComponentModule } from '../backdrop/backdrop.component';
     </div>
   `,
   styleUrls: ['./side-drawer.component.scss'],
-  changeDetection: ChangeDetectionStrategy.Default,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SideDrawerComponent {
   @Input() opened = false;

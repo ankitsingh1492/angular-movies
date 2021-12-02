@@ -25,7 +25,7 @@ import { RxState } from '@rx-angular/state';
     </div>
   `,
   styleUrls: ['dark-mode-toggle.component.scss'],
-  changeDetection: ChangeDetectionStrategy.Default,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DarkModeToggleComponent extends RxState<{
   isLightTheme: boolean;

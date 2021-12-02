@@ -73,7 +73,7 @@ type Movie = MovieModel & ImageTag;
   `,
   styleUrls: ['./movie-list.component.scss'],
   providers: [RxState],
-  changeDetection: ChangeDetectionStrategy.Default
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MovieListComponent {
 

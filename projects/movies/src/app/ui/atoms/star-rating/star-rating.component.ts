@@ -35,7 +35,7 @@ const starsArray: number[] = new Array(numStars).fill(1);
     <div class="rating-value" *ngIf="showRating">{{ rating }}</div>
   `,
   styleUrls: ['star-rating.component.scss'],
-  changeDetection: ChangeDetectionStrategy.Default,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class StarRatingComponent {
   range = range;
