@@ -11,11 +11,7 @@ export const scheduledAppInitializerProvider = [
     provide: APP_INITIALIZER,
     useFactory: () =>
       (): Promise<void> =>
-        new Promise<void>((resolve) => {
-          setTimeout(() =>
-            resolve()
-          );
-        }),
+        new Promise<void>((resolve) => setTimeout(resolve)),
     deps: [],
     multi: true
   }
