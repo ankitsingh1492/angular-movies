@@ -20,11 +20,11 @@ type MoviesState = {
 export class MovieListPageComponent extends RxState<MoviesState> {
 
   readonly movies$ = this.select('movies');
-  readonly loading$ = this.select(
+  readonly notLoading$ = this.select(
     selectSlice(['loading', 'movies'], {
       movies: (a, b) => a?.length !== b?.length
     }),
-    map(({ loading, movies }) => loading || movies === null)
+    map(({ loading, movies }) => !(loading || movies === null))
   );
   readonly title$ = this.select('title');
 

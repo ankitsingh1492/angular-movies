@@ -12,10 +12,8 @@ type Movie = MovieModel & ImageTag;
   selector: 'app-movie-list',
   template: `
     <ng-content select='.header'></ng-content>
-    <ng-container
-      *rxLet="hasMovies$; let hasMovies;"
-    >
-      <div class='movies-list--grid' *ngIf='hasMovies; else noData' data-test="list-container">
+    <ng-container>
+      <div class='movies-list--grid' *rxIf='hasMovies$; else noData' data-test="list-container">
         <a
           class='movies-list--grid-item'
           *rxFor='let movie of (movies$); index as idx; trackBy: trackByMovieId; '
@@ -49,7 +47,7 @@ type Movie = MovieModel & ImageTag;
         </a>
         <div class='pagination'></div>
       </div>
-    </ng-container>
+
 
     <ng-template #noData>
       <div style="display: flex; align-items: center;">

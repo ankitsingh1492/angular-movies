@@ -33,7 +33,7 @@ export class MovieDetailPageComponent {
     selectSlice(['loading', 'movie', 'cast'])
   );
 
-  readonly recommendedLoading$ = this.state.select('loading');
+  readonly notRecommendedLoading$ = this.state.select(map(({loading}) => !loading));
   readonly recommendations$ = this.state.select('recommendations');
 
   private readonly id$ = this.route.params.pipe(map(({ id }) => id));

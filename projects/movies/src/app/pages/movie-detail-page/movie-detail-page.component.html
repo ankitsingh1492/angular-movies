@@ -124,11 +124,8 @@
     <app-loader></app-loader>
   </ng-template>
 </div>
-<div
-  class="padding-wrapper movie-detail--recommended"
-  *rxLet="recommendedLoading$; let loading"
->
-  <app-movie-list *ngIf="!loading" [movies]="recommendations$">
+<div class="padding-wrapper movie-detail--recommended">
+  <app-movie-list *rxIf="notRecommendedLoading$" [movies]="recommendations$">
     <div class="header">
       <h1 class="title">Recommended</h1>
       <h2 class="subtitle">Movies</h2>
