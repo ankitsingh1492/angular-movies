@@ -149,6 +149,7 @@ export class StateService extends RxState<State> {
       }
     );
 
+    this.hold(this.select(), console.log);
     this.hold(this.routerParams$, this.routerFetchEffect);
   }
 

@@ -47,7 +47,7 @@ export const ROUTING_IMPORTS = [
      *
      * Disable initial sync navigation in router config and schedule it in router-outlet container component
      */
-    initialNavigation: 'disabled',
+    initialNavigation: 'enabled',
     onSameUrlNavigation: 'reload',
     relativeLinkResolution: 'legacy'
   })

@@ -45,12 +45,13 @@ export class AppShellComponent {
       )
     );
     this.init();
+
     /**
      * **🚀 Perf Tip for TBT:**
      *
      * Disable initial sync navigation in router config and schedule it in router-outlet container component
      */
-    setTimeout(() => this.router.navigate([]));
+    // setTimeout(() => this.router.navigate([]));
   }
 
   init() {

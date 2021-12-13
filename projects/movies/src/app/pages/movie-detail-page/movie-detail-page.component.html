@@ -1,4 +1,4 @@
-<div class="movie-detail--grid" *rxLet="detailState$; let vs">
+<div class="movie-detail--grid" *ngIf="detailState$ | async as vs">
   <ng-container *ngIf="!vs.loading; else loading">
     <div class="movie-detail--grid-item gradient">
       <app-aspect-ratio-box [aspectRatio]="W780H1170.WIDTH / W780H1170.HEIGHT">
@@ -126,9 +126,8 @@
 </div>
 <div
   class="padding-wrapper movie-detail--recommended"
-  *rxLet="recommendedLoading$; let loading"
 >
-  <app-movie-list *ngIf="!loading" [movies]="recommendations$">
+  <app-movie-list *ngIf="!(recommendedLoading$ | async)" [movies]="recommendations$">
     <div class="header">
       <h1 class="title">Recommended</h1>
       <h2 class="subtitle">Movies</h2>

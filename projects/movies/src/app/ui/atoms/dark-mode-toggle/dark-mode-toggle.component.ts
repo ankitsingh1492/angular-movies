@@ -9,12 +9,11 @@ import { RxState } from '@rx-angular/state';
 
       <span class="toggle">
         <input
-          *rxLet="isLightTheme$; let checked"
           class="toggle-track"
           type="checkbox"
           id="dark-mode"
-          [checked]="checked"
-          (change)="setChecked(!checked)"
+          [checked]="get('isLightTheme')"
+          (change)="setChecked(!get('isLightTheme'))"
         />
         <label style="color: transparent" for="dark-mode">
           Toggle Switch
@@ -50,5 +49,8 @@ export class DarkModeToggleComponent extends RxState<{
 
   setChecked(isLightTheme: boolean): void {
     this.set({ isLightTheme });
+  }
+  getChecked(): boolean {
+    return this.get().isLightTheme;
   }
 }

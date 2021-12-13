@@ -12,44 +12,41 @@ type Movie = MovieModel & ImageTag;
   selector: 'app-movie-list',
   template: `
     <ng-content select='.header'></ng-content>
-    <ng-container
-      *rxLet="hasMovies$; let hasMovies;"
-    >
-      <div class='movies-list--grid' *ngIf='hasMovies; else noData' data-test="list-container">
-        <a
-          class='movies-list--grid-item'
-          *rxFor='let movie of (movies$); index as idx; trackBy: trackByMovieId; '
-          [href]="'/movie/' + movie.id"
-          (click)='$event.preventDefault(); navigateToMovie(movie)'
-          [attr.data-test]="'list-item-idx-'+idx"
-        >
-          <div class='movies-list--grid-item-image gradient'>
-            <app-aspect-ratio-box [aspectRatio]='movie.imgWidth / movie.imgHeight'>
-              <!--
-              **🚀 Perf Tip for LCP:**
-              To get out the best performance use the native HTML attribute loading="lazy" instead of a directive.
-              This avoids bootstrap and template evaluation time and reduces scripting time in general.
-              -->
-              <img
-                [attr.loading]="idx === 0 ? '' : 'lazy'"
-                [src]='movie.url'
-                [width]='movie.imgWidth'
-                [height]='movie.imgHeight'
-                alt='poster movie'
-                [title]='movie.title'
-              />
-            </app-aspect-ratio-box>
-          </div>
-          <div class='movies-list--grid-item__details'>
-            <h2 class='movies-list--grid-item__details-title'>
-              {{ movie.title }}
-            </h2>
-            <app-star-rating [rating]='movie.vote_average'></app-star-rating>
-          </div>
-        </a>
-        <div class='pagination'></div>
-      </div>
-    </ng-container>
+    <div class='movies-list--grid' *ngIf='hasMovies$ | async as hasMovies; else noData' data-test="list-container">
+      <a
+        class='movies-list--grid-item'
+        *ngFor='let movie of (movies$ | async); index as idx; trackBy: trackByMovieId; '
+        [href]="'/movie/' + movie.id"
+        (click)='$event.preventDefault(); navigateToMovie(movie)'
+        [attr.data-test]="'list-item-idx-'+idx"
+      >
+        <div class='movies-list--grid-item-image gradient'>
+          <app-aspect-ratio-box [aspectRatio]='movie.imgWidth / movie.imgHeight'>
+            <!--
+            **🚀 Perf Tip for LCP:**
+            To get out the best performance use the native HTML attribute loading="lazy" instead of a directive.
+            This avoids bootstrap and template evaluation time and reduces scripting time in general.
+            -->
+            <img
+              [attr.loading]="idx === 0 ? '' : 'lazy'"
+              [src]='movie.url'
+              [width]='movie.imgWidth'
+              [height]='movie.imgHeight'
+              alt='poster movie'
+              [title]='movie.title'
+            />
+          </app-aspect-ratio-box>
+        </div>
+        <div class='movies-list--grid-item__details'>
+          <h2 class='movies-list--grid-item__details-title'>
+            {{ movie.title }}
+          </h2>
+          <app-star-rating [rating]='movie.vote_average'></app-star-rating>
+        </div>
+      </a>
+      <div class='pagination'></div>
+    </div>
+
 
     <ng-template #noData>
       <div style="display: flex; align-items: center;">

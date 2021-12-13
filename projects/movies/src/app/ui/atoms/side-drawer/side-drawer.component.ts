@@ -7,7 +7,7 @@ import { getActions } from '../../../shared/rxa-custom/actions';
   selector: 'app-side-drawer',
   template: `
     <app-backdrop
-      (click)="ui.openedChange(false)"
+      (click)="setOpened(false)"
       [opened]="opened"
     ></app-backdrop>
     <div class="side-drawer" [class.opened]="opened">
@@ -21,6 +21,11 @@ export class SideDrawerComponent {
   ui = getActions<{ openedChange: boolean }>();
   @Input() opened = false;
   @Output() openedChange = this.ui.openedChange$;
+
+  setOpened(val: boolean) {
+    this.opened = val;
+    this.ui.openedChange(this.opened);
+  }
 }
 
 @NgModule({
