@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
 import { exhaustMap, filter, map, Observable, OperatorFunction, pipe, startWith, switchMap, withLatestFrom } from 'rxjs';
 import { Tmdb2Service } from '../../data-access/api/tmdb2.service';
 import { MovieGenreModel } from '../../data-access/model/movie-genre.model';
@@ -9,6 +9,7 @@ import { parseTitle } from '../utils/parse-movie-list-title';
 import { NavigationEnd, Router } from '@angular/router';
 import { getActions } from '../rxa-custom/actions';
 import { withLoadingEmission } from '../utils/withLoadingEmissions';
+import { WINDOW } from '../tokens/tokens';
 
 type RouterParams = {
   type: 'genre' | 'category';
@@ -55,7 +56,7 @@ export class StateService extends RxState<State> {
         map(_ => {
           // This is a naive way to reduce scripting of router service :)
           // Obviously the params ane not properly managed
-          const [type, identifier] = window.location.href.split('/').slice(-2);
+          const [type, identifier] = this.window.location.href.split('/').slice(-2);
           return { type, identifier };
         }),
         selectSlice(['identifier', 'type'])
@@ -97,7 +98,7 @@ export class StateService extends RxState<State> {
     switchMap(({ type }) => type === 'genre' ? this.genreMovieList$ : this.categoryMovieList$)
   );
 
-  constructor(private tmdb2Service: Tmdb2Service, private router: Router) {
+  constructor(private tmdb2Service: Tmdb2Service, private router: Router,   @Inject(WINDOW) private window: Window) {
     super();
   }
 

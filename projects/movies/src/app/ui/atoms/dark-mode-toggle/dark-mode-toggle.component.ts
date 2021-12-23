@@ -1,5 +1,6 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
 import { RxState } from '@rx-angular/state';
+import { DOCUMENT } from '@angular/common';
 
 @Component({
   selector: 'app-dark-mode-toggle',
@@ -32,7 +33,7 @@ export class DarkModeToggleComponent extends RxState<{
 }> {
   isLightTheme$ = this.select('isLightTheme');
 
-  constructor() {
+  constructor(@Inject(DOCUMENT) private document: Document) {
     super();
     this.set({ isLightTheme: true });
     this.hold(this.isLightTheme$, this.toggleTheme);
@@ -40,11 +41,11 @@ export class DarkModeToggleComponent extends RxState<{
 
   toggleTheme = (isLightTheme: boolean): void => {
     if (isLightTheme) {
-      window.document.body.classList.remove('dark');
-      window.document.body.classList.add('light');
+      this.document.body.classList.remove('dark');
+      this.document.body.classList.add('light');
     } else {
-      window.document.body.classList.add('dark');
-      window.document.body.classList.remove('light');
+      this.document.body.classList.add('dark');
+      this.document.body.classList.remove('light');
     }
   }
 

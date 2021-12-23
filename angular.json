@@ -19,7 +19,6 @@
       },
       "root": "projects/movies",
       "sourceRoot": "projects/movies/src",
-      "prefix": "mv",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
@@ -182,17 +181,18 @@
           "builder": "@nguniversal/builders:prerender",
           "options": {
             "routes": [
-              "/"
-            ]
+              "/list/category/top_rated"
+            ],
+            "routesFile": "/tmp/prerender-routes.txt"
           },
           "configurations": {
             "production": {
               "browserTarget": "movies:build:production",
-              "serverTarget": "movies:server:production"
+              "serverTarget": "movies:build-server:production"
             },
             "development": {
               "browserTarget": "movies:build:development",
-              "serverTarget": "movies:server:development"
+              "serverTarget": "movies:build-server:development"
             }
           },
           "defaultConfiguration": "production"

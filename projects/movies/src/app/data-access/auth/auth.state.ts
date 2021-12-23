@@ -1,6 +1,8 @@
-import { Injectable } from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
 import { map } from 'rxjs';
 import { RxState } from '@rx-angular/state';
+import { WINDOW } from '../../shared/tokens/tokens';
+import { LocalStorageService } from '../../shared/local-storage/local-storage.service';
 
 interface AuthState {
   requestToken: string | null;
@@ -36,8 +38,7 @@ export function isAuthenticationInProgress({
   providedIn: 'root',
 })
 export class AuthStateService extends RxState<AuthState>{
-  redirectUrl = `${window.location.protocol}//${window.location.hostname}:${window.location.port}/movies/popular`;
-  private localStorage = window.localStorage;
+  redirectUrl = `${this.window.location.protocol}//${this.window.location.hostname}:${this.window.location.port}/movies/popular`;
 
   requestToken$ = this.select('requestToken');
   accessToken$ = this.select('accessToken');
@@ -46,7 +47,10 @@ export class AuthStateService extends RxState<AuthState>{
     map(isAuthenticationInProgress)
   );
 
-  constructor() {
+  constructor(
+    @Inject(WINDOW) private window: Window,
+    private localStorage: LocalStorageService
+  ) {
     super();
     this.set({
       requestToken: this.localStorage.getItem('requestToken') || undefined,
