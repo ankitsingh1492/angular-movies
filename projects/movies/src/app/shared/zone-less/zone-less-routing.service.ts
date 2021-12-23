@@ -1,7 +1,8 @@
-import { ApplicationRef, Injectable } from '@angular/core';
+import { ApplicationRef, Inject, Injectable } from '@angular/core';
 import { RxState } from '@rx-angular/state';
 import { NavigationEnd, Router } from '@angular/router';
 import { isZonePresent } from './is-zone-present';
+import { WINDOW } from '../tokens/tokens';
 
 /**
  * A small service encapsulating the hacks needed for routing (and bootstrapping) in zone-less applications
@@ -10,7 +11,9 @@ import { isZonePresent } from './is-zone-present';
   providedIn: 'root'
 })
 export class ZonelessRouting extends RxState<any> {
-  constructor(private router: Router, private appRef: ApplicationRef) {
+  constructor(private router: Router, private appRef: ApplicationRef,
+              @Inject(WINDOW) private window: Window,
+              ) {
     super();
   }
 
@@ -21,7 +24,7 @@ export class ZonelessRouting extends RxState<any> {
      * In zone-less applications we have to trigger CD on every `NavigationEnd` event that changes the view.
      * This is a necessity to make it work zone-less, but does not make the app faster.
      */
-    if (!isZonePresent()) {
+    if (!isZonePresent(this.window)) {
       this.hold(
         // Filter relevant navigation events for change detection
         this.router.events,
