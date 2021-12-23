@@ -9,7 +9,7 @@ import { parseTitle } from '../utils/parse-movie-list-title';
 import { NavigationEnd, Router } from '@angular/router';
 import { getActions } from '../rxa-custom/actions';
 import { withLoadingEmission } from '../utils/withLoadingEmissions';
-import { WINDOW } from '../tokens/tokens';
+import { WINDOW } from '../window/token';
 
 type RouterParams = {
   type: 'genre' | 'category';

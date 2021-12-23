@@ -1,15 +1,8 @@
-import { Inject, Injectable, InjectionToken } from '@angular/core';
-import { windowFactory } from '../tokens/tokens';
-
-export const LOCAL_STORAGE = new InjectionToken<Storage>(
-  'LOCAL_STORAGE token',
-  {
-    factory: () => windowFactory().localStorage,
-  },
-);
+import { Inject, Injectable } from '@angular/core';
+import { LOCAL_STORAGE } from './token';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class LocalStorageService {
 
@@ -18,6 +11,7 @@ export class LocalStorageService {
   ) {
 
   }
+
   setItem(key: string, data: string): void {
     this.windowLocalStorage.setItem(key, data);
   }

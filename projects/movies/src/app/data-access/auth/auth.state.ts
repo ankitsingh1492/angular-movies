@@ -1,7 +1,7 @@
 import { Inject, Injectable } from '@angular/core';
 import { map } from 'rxjs';
 import { RxState } from '@rx-angular/state';
-import { WINDOW } from '../../shared/tokens/tokens';
+import { WINDOW } from '../../shared/window/token';
 import { LocalStorageService } from '../../shared/local-storage/local-storage.service';
 
 interface AuthState {

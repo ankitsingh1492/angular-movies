@@ -1,16 +1,8 @@
-import { Inject, Injectable, InjectionToken } from '@angular/core';
-import { windowFactory } from '../tokens/tokens';
-
-export const SESSION_STORAGE = new InjectionToken<Storage>(
-  'SESSION_STORAGE token',
-  {
-    factory: () => windowFactory().sessionStorage,
-  },
-);
-
+import { Inject, Injectable } from '@angular/core';
+import { SESSION_STORAGE } from './token';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class SessionStorageService {
 
@@ -19,6 +11,7 @@ export class SessionStorageService {
   ) {
 
   }
+
   save(key: string, data: string): void {
     this.windowSessionStorage.setItem(key, data);
   }

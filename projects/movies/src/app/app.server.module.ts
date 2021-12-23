@@ -4,6 +4,7 @@ import { AppComponent } from './app.component';
 import { RXA_PROVIDER_SSR } from './shared/rxa-custom/rxa.provider.ssr';
 import { SSR_IMPORTS } from './shared/ssr/ssr.imports';
 import { BrowserModule } from '@angular/platform-browser';
+import { BROWSER_WINDOW_PROVIDERS_SSR } from './shared/window/browser-window-providers-ssr';
 
 @NgModule({
   declarations: [],
@@ -15,10 +16,11 @@ import { BrowserModule } from '@angular/platform-browser';
      *
      * Setup SSR to increase LCP by shipping rendered HTML on first load.
      */
-    SSR_IMPORTS,
+    SSR_IMPORTS
   ],
   providers: [
-    RXA_PROVIDER_SSR
+    RXA_PROVIDER_SSR,
+    BROWSER_WINDOW_PROVIDERS_SSR
   ],
   bootstrap: [AppComponent]
 })

@@ -1,8 +1,10 @@
-import {inject, InjectionToken} from '@angular/core';
+import { inject, InjectionToken } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 
-
-export const windowFactory = () => {
+/**
+ * @internal
+ */
+export const windowFactory = (): Window => {
   const { defaultView } = inject(DOCUMENT);
 
   if (!defaultView) {
@@ -10,11 +12,12 @@ export const windowFactory = () => {
   }
 
   return defaultView;
-}
+};
+
 
 export const WINDOW = new InjectionToken<Window>(
   'WINDOW token',
   {
     factory: windowFactory
-  },
+  }
 );

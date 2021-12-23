@@ -3,7 +3,7 @@ import { exhaustMap, map, Observable, take } from 'rxjs';
 import { Tmdb2Service } from '../api/tmdb2.service';
 import { AuthStateService, isAuthenticationInProgress } from './auth.state';
 import { LocalStorageService } from '../../shared/local-storage/local-storage.service';
-import { WINDOW } from '../../shared/tokens/tokens';
+import { WINDOW } from '../../shared/window/token';
 
 @Injectable({
   providedIn: 'root'
