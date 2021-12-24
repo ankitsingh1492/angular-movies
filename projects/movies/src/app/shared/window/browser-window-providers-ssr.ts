@@ -2,11 +2,12 @@ import { PLATFORM_ID, StaticProvider } from '@angular/core';
 import { isPlatformServer } from '@angular/common';
 import { WINDOW } from './token';
 
-function createWindow(): Window {
+function createWindow(protocol: string = 'https'): Window {
 
   const win = {} as any;
   win.Object = Object;
   win.Math = Math;
+  win.location = { protocol };
 
   win.localStorage = {
     getItem: (): undefined => undefined,
@@ -26,7 +27,7 @@ export const BROWSER_WINDOW_PROVIDERS_SSR: Array<StaticProvider> = [
       if (!isPlatformServer(platfromId)) {
         throw new Error('Do not import SSR related code into non SSR code.');
       }
-      return createWindow();
+      return createWindow('/');
     },
     deps: [PLATFORM_ID]
   }

@@ -53,14 +53,14 @@ export function app(): express.Express {
   // All regular routes use the Universal engine
   server.get('*', (req, res) => {
     // return rendered HTML including Angular generated DOM
-    console.log('GET SSR ROUTE');
+    console.log('GET SSR ROUTE', req.url);
     res.render(indexHtml, {
       req,
       providers: [
         {
           provide: APP_BASE_HREF,
           useValue: req.baseUrl,
-        },
+        }
       ],
     });
   });
